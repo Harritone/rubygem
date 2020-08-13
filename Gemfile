@@ -25,3 +25,5 @@ group :development do
 end
 
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
+gem 'bootstrap', '~> 4.5', '>= 4.5.2'
+gem 'jquery-rails'
