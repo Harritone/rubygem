@@ -2,11 +2,11 @@
   %a.navbar-brand{:href => "#"} Navbar
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        %a.nav-link{:href => "#"}
-          Home
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item.active
+            %a.nav-link{:href => "#"}
+              Home
           %span.sr-only (current)
       %li.nav-item
         %a.nav-link{:href => "#"} Link
@@ -17,7 +17,7 @@
           %a.dropdown-item{:href => "#"} Action
           %a.dropdown-item{:href => "#"} Another action
           .dropdown-divider
-          %a.dropdown-item{:href => "#"} Something else here
+            %a.dropdown-item{:href => "#"} Something else here
       %li.nav-item
         %a.nav-link.disabled{:href => "#"} Disabled
     %form.form-inline.my-2.my-lg-0
@@ -29,7 +29,9 @@
   %p Find me in app/views/home/index.html.erb
 
 .fa.fa-flag
-  .fab.fa-amazon
+  = link_to root_path, class: 'btn btn-success' do
+    .fa.fa-home
+      Homepage
     = link_to root_path, class: 'btn btn-success' do
-      .fa.fa-home
+      .fab.fa-amazon
         Homepage
