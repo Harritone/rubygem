@@ -1,0 +1,30 @@
+.card
+  .card-header
+    .fa.fa-user
+    = user.email
+  .card-footer
+    Signed up
+    = time_ago_in_words(user.created_at)
+    ago
+    .row
+  .card-footer
+    sign in count
+    = user.sign_in_count
+    .row
+    current sign in
+    = user.current_sign_in_at
+    .row
+    last sign in
+    = user.last_sign_in_at
+    .row
+    current sign in ip
+    = user.current_sign_in_ip
+    .row
+    last sign in ip
+    = user.last_sign_in_ip
+  .card-footer
+    Confirmed email?
+    - if user.confirmed_at.present?
+      .badge.badge-success Yes
+    - else
+      .badge.badge-danger No
