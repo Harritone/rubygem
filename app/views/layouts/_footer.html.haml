@@ -1,0 +1,20 @@
+%hr
+%footer
+  .container
+    .row
+      .col-md-4
+        Copyright
+        = "&copy; #{Time.now.year}".html_safe
+        .row
+        .fa.fa-envelope
+        = mail_to "yourrasil@gmail.com"
+        .row
+      .col-md-4
+        Privacy policy
+        .row
+        Terms and conditions
+      .col-md-4
+        About
+        .row
+        = link_to "Teach", new_course_path
+%br
