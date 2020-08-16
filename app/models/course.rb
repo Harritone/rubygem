@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   belongs_to :user
   has_rich_text :description
 
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -28,4 +29,8 @@ class Course < ApplicationRecord
   def to_s
     title
   end
+
+  include PublicActivity::Model
+  tracked owner: Proc.new { |controller, model| controller.current_user }
+
 end
