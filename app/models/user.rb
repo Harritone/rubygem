@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_many :courses
 
+  ransacker :sign_in_count do
+    Arel.sql("to_char(\"#{table_name}\".\"sign_in_count\", '99999999')")
+  end
+
   def to_s
     email
   end

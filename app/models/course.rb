@@ -8,6 +8,17 @@ class Course < ApplicationRecord
   friendly_id :title, use: :slugged
 
   #friendly_id :generated_slug, use: :slugged
+  LEVELS = [:"Begginer", :"Intermediate", :"Advanced"]
+
+  def self.levels
+    LEVELS.map { |level| [level, level] }
+  end
+
+  LANGUAGES = [:"English", :"Russian", :"Spanish", :"Polish", :"French"]
+
+  def self.languages
+    LANGUAGES.map { |language| [language, language] }
+  end
 
   def generated_slug
     require 'securerandom'
