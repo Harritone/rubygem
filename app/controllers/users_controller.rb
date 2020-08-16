@@ -1,8 +1,29 @@
 class UsersController < ApplicationController
-  def index
-    #@users = User.all.order(created_at: :desc)
+  before_action :set_user, except: [:index]
 
+  def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to users_path, notice: "Role of  #{@user.email} was successfuly updated"
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit({ role_ids: [] })
   end
 end

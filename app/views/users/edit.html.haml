@@ -1,0 +1,11 @@
+= simple_form_for @user do |f|
+  .card
+    .card-header
+      Editing role for
+      = @user.email
+    .card-body
+      = f.collection_check_boxes :role_ids, Role.all, :id, :name
+      = f.error :roles, class: "text-danger"
+    .card-footer
+      = f.button :submit, class: "btn btn-success"
+      = link_to "Cancel", users_path, class: "btn btn-danger"
