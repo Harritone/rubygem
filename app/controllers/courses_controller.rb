@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :perform_authorization, only: [:edit, :update, :destroy]
 
   def index
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
@@ -14,12 +15,12 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    authorize @course
   end
 
   def create
     @course = Course.new(course_params)
     @course.user = current_user
+    authorize @course
 
     respond_to do |format|
       if @course.save
@@ -59,5 +60,9 @@ class CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:title, :description, :short_description, :price, :language, :level)
+    end
+
+    def perform_authorization
+      authorize @course
     end
 end
