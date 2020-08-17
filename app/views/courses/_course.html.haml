@@ -9,6 +9,10 @@
       .fa.fa-wallet
       = number_to_currency(course.price)
   .card-footer
+    .fa.fa-book
+    = course.lessons.count
+    lessons
+  .card-footer
     .row
       .col-md-6
         .fa.fa-language
