@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index]
+  before_action :perform_authorization, only: [:edit, :update]
 
   def index
     @q = User.ransack(params[:q])
@@ -25,5 +26,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit({ role_ids: [] })
+  end
+
+  def perform_authorization
+    authorize @user
   end
 end
