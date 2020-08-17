@@ -9,11 +9,15 @@ class User < ApplicationRecord
 
   has_many :courses
 
+  extend FriendlyId
+  friendly_id :email, use: :slugged
+
   def username
     if email.present?
       self.email.split(/@/).first
     end
   end
+
 
   ransacker :sign_in_count do
     Arel.sql("to_char(\"#{table_name}\".\"sign_in_count\", '99999999')")
