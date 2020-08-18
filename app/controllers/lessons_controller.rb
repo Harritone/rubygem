@@ -1,5 +1,6 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
+  before_action :perform_authorization, only: [:update, :edit, :destroy, :show]
 
   # GET /lessons
   # GET /lessons.json
@@ -70,5 +71,9 @@ class LessonsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def lesson_params
       params.require(:lesson).permit(:title, :content, :course_id)
+    end
+
+    def perform_authorization
+      authorize @lesson
     end
 end
