@@ -22,6 +22,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(lesson_params)
     @course = Course.friendly.find_by_slug!(params[:course_id])
     @lesson.course_id = @course.id
+    authorize @lesson
 
     respond_to do |format|
       if @lesson.save
