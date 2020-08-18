@@ -23,6 +23,9 @@
     = link_to 'refresh', courses_path
 
   .col-md-10
+    != pagy_bootstrap_nav(@pagy)
     .card-columns
       - @courses.each do |course|
         = render 'courses/course', course: course
+    != pagy_bootstrap_nav(@pagy)
+
