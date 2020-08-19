@@ -4,7 +4,7 @@ class EnrollmentsController < ApplicationController
   before_action :perform_authorization, only: [:edit, :update, :destroy]
 
   def index
-    @enrollments = Enrollment.all
+    @pagy, @enrollments = pagy(Enrollment.all)
     authorize @enrollments
   end
 
