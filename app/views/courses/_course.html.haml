@@ -8,6 +8,8 @@
     .text-center
       .fa.fa-wallet
       = enrollment_button(course)
+      .text-center
+        = review_button(course)
   .card-footer
     .fa.fa-tasks
     = course.lessons.count

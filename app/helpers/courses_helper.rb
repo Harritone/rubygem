@@ -9,10 +9,23 @@ module CoursesHelper
       elsif course.price > 0
         link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-success'
       else
-        link_to "Free", new_course_enrollment_path(course), class: 'btn btn-info'
+        link_to "Free", new_course_enrollment_path(course), class: 'btn btn-md btn-info'
       end
     else
       link_to "Check price", course_path(course), class: 'btn btn-md btn-success'
+    end
+  end
+
+  def review_button(course)
+    user_course = course.enrollments.where(user: current_user)
+    if current_user
+      if course.enrollments.where(user: current_user).any?
+        if course.enrollments.pending_review.any?
+          link_to 'Add a Review', edit_enrollment_path(user_course.first), class: 'btn btn-md btn-warning'
+        else
+          link_to 'Your Review', enrollment_path(user_course.first), class: 'btn btn-md btn-warning'
+        end
+      end
     end
   end
 end
