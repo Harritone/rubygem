@@ -1,9 +1,11 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
   before_action :set_course, only: [:new, :create]
+  before_action :perform_authorization, only: [:edit, :update, :destroy]
 
   def index
     @enrollments = Enrollment.all
+    authorize @enrollments
   end
 
   def show
@@ -57,6 +59,10 @@ class EnrollmentsController < ApplicationController
 
     def set_course
       @course = Course.friendly.find_by_slug!(params[:course_id])
+    end
+
+    def perform_authorization
+      authorize @enrollment
     end
 end
 
