@@ -10,28 +10,50 @@
 
 .table-responsive
   %table.table.table-bordered.table-striped.table-sm
-    %thead
+    %thead.enrollment-table
       %tr
-        %th Course
-        %th User
-        %th Rating
-        %th Review
-        %th Price
+        %th ID
+        %th
+          .fa.fa-user
+          User
+        %th
+          .fa.fa-graduation-cap
+          Course
+        %th 
+          .fa.fa-dollar-sign
+          Price
+        %th 
+          .fa.fa-clock
+          Enrolled
+        %th
+          .text-warning.fa.fa-clock
+          Reviewed on
+        %th
+          .fa.fa-star
+          Rating
+        %th 
+          .fa.fa-comment
+          Review
         %th
         %th
         %th
 
     %tbody
       - @enrollments.each do |enrollment|
-        %tr
-          %td= enrollment.course
-          %td= enrollment.user
+        %tr.enrollment-table
+          %td= enrollment.id
+          %td= link_to enrollment.user, user_path(enrollment.user)
+          %td= link_to enrollment.course, course_path(enrollment.course)
+          %td= number_to_currency(enrollment.price)
+          %td= enrollment.created_at.strftime("%d.%m.%Y %H:%M")
+          %td
+            - if enrollment.rating.present?
+              = enrollment.updated_at.strftime("%d.%m.%Y %H:%M")
           %td= enrollment.rating
           %td= enrollment.review
-          %td= number_to_currency(enrollment.price)
-          %td= link_to 'Show', enrollment
-          %td= link_to 'Edit', edit_enrollment_path(enrollment)
-          %td= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to 'See Review', enrollment
+          %td= link_to 'Add Review', edit_enrollment_path(enrollment)
+          %td= link_to 'Delete enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
