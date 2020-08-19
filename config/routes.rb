@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :show, :update]
   get 'home/index'
-  get 'home/activity'
+  get 'activity', to: 'home#activity'
   root 'home#index'
 end
