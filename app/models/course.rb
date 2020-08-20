@@ -9,6 +9,9 @@ class Course < ApplicationRecord
   has_many :enrollments
   has_rich_text :description
 
+  scope :latest, -> { order(created_at: :desc).limit(3)}
+  scope :top_rated, -> { order(avarage_rating: :desc, created_at: :desc).limit(3) }
+  scope :popular, -> { order(enrollments_count: :desc, created_at: :desc).limit(3) }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
