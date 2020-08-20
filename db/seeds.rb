@@ -1,13 +1,13 @@
 #User.create!(email: 'test@test.com', password: '111111', password_confirmation: '111111')
-#user = User.new(
-#  email: 'test@test.com',
-#  password: '111111',
-#  password_confirmation: '111111'
-#)
-#user.skip_confirmation!
-#user.save!
-#
-#puts "Admin created"
+user = User.new(
+  email: 'test@test.com',
+  password: '111111',
+  password_confirmation: '111111'
+)
+user.skip_confirmation!
+user.save!
+
+puts "Admin created"
 
 PublicActivity.enabled = false
 30.times do

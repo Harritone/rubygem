@@ -1,6 +1,6 @@
 class Enrollment < ApplicationRecord
   belongs_to :course
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 
   validates :user, :course, presence: true
   validates_uniqueness_of :user_id, scope: :course_id #user can't be subscribed to the same course more than once
