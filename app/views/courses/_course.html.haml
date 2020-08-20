@@ -11,6 +11,9 @@
       .text-center
         = review_button(course)
   .card-footer
+    .text-warning.fa.fa-star
+    = course.avarage_rating
+  .card-footer
     .fa.fa-tasks
     = course.lessons.count
     lessons
