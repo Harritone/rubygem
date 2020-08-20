@@ -1,6 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
-  before_action :set_course, only: [:new, :create]
+	before_action :set_course, only: [:new, :create]
   before_action :perform_authorization, only: [:edit, :update, :destroy]
 
   def index
@@ -29,12 +29,12 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    if @course.price > 0
-      flash[:alert] = "You cannot access payed courses yet."
-      redirect_to new_course_enrollment_path
+		if @course.price > 0
+      flash[:alert] = "You can not access paid courses yet."
+      redirect_to new_course_enrollment_path(@course)
     else
       @enrollment = current_user.buy_course(@course)
-      redirect_to course_path(@course), notice: "You are enrolled"
+      redirect_to course_path(@course), notice: "You are enrolled!"
     end
   end
 
@@ -60,7 +60,7 @@ class EnrollmentsController < ApplicationController
 
   private
     def set_enrollment
-      @enrollment = Enrollment.friendly.find(params[:id])
+      @enrollment = Enrollment.friendly.find_by_slug!(params[:id])
     end
 
     def enrollment_params
