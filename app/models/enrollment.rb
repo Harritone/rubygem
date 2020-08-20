@@ -1,5 +1,5 @@
 class Enrollment < ApplicationRecord
-  belongs_to :course
+  belongs_to :course, counter_cache: true
   belongs_to :user, counter_cache: true
 
   validates :user, :course, presence: true

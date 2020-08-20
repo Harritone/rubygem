@@ -13,9 +13,13 @@
   .card-footer
     .text-warning.fa.fa-star
     = course.avarage_rating
+    (
+    .fa.fa-user-graduate
+    = course.enrollments_count
+    )
   .card-footer
     .fa.fa-tasks
-    = course.lessons.count
+    = course.lessons_count
     lessons
   .card-footer
     .row
@@ -26,15 +30,15 @@
         .text-right
           .fa.fa-brain
           = course.level
-  .card-footer
-    .row
-      .col-md-6
-        .far.fa-clock
-        = course.created_at.strftime('%d-%b-%Y')
-      .col-md-6
-        .text-right
-          .fas.fa-chalkboard-teacher
-          = link_to course.user.username, user_path(course.user)
+  /.card-footer
+  /  .row
+  /    .col-md-6
+  /      .far.fa-clock
+  /      = course.created_at.strftime('%d-%b-%Y')
+  /    .col-md-6
+  /      .text-right
+  /        .fas.fa-chalkboard-teacher
+  /        = link_to course.user.username, user_path(course.user)
   -if current_user
     - if policy(course).edit?
       .card-footer
