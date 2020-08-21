@@ -14,6 +14,10 @@ class Course < ApplicationRecord
   scope :latest, -> { order(created_at: :desc).limit(3)}
   scope :top_rated, -> { order(avarage_rating: :desc, created_at: :desc).limit(3) }
   scope :popular, -> { order(enrollments_count: :desc, created_at: :desc).limit(3) }
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
+  scope :approved, -> { where(approved: true) }
+  scope :unapproved, -> { where(approved: false) }
 
   extend FriendlyId
   friendly_id :title, use: :slugged

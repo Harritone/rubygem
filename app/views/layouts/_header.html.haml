@@ -37,6 +37,15 @@
                 Admin
 
             .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "adminDropdown"}
+
+              = link_to unapproved_courses_path, class: 'dropdown-item' do
+                .fa.fa-lock
+                Unapproved courses
+                .badge.badge-danger
+                  = Course.unapproved.count
+              
+              .dropdown-divider
+              
               = link_to users_path, class: 'dropdown-item' do
                 .fa.fa-users
                 Users
@@ -56,6 +65,8 @@
               = link_to activity_path, class: 'dropdown-item' do
                 .fa.fa-bell
                 Activity
+
+              .dropdown-divider
 
               = link_to analitics_path, class: 'dropdown-item' do
                 .fa.fa-chart-line
