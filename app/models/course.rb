@@ -7,6 +7,8 @@ class Course < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_many :lessons, dependent: :destroy
   has_many :enrollments
+  has_many :user_lessons, through: :lessons
+
   has_rich_text :description
 
   scope :latest, -> { order(created_at: :desc).limit(3)}
@@ -46,5 +48,12 @@ class Course < ApplicationRecord
       update_column :avarage_rating, (0)
     end
   end
+
+  def progress(user)
+    unless self.lessons_count == 0
+    (user_lessons.where(user: user).count/self.lessons_count.to_f) * 100
+    end
+  end
+
 
 end
