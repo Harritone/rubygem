@@ -57,6 +57,10 @@
                 .fa.fa-bell
                 Activity
 
+              = link_to analitics_path, class: 'dropdown-item' do
+                .fa.fa-chart-line
+                Analitics
+
         - if current_user.has_role?(:teacher)
           %li.nav-item.dropdown
             %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
