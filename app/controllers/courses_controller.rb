@@ -59,22 +59,22 @@ class CoursesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @course.update(course_params)
+    if @course.update(course_params)
+      respond_to do |format|
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
-      else
-        format.html { render :edit }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @course.destroy
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
-      format.json { head :no_content }
+    if @course.destroy
+      respond_to do |format|
+        format.html { redirect_to courses_url, notice: 'Course was successfully deleted.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to @course, alert: 'Course has enrollments and cannot be deleted.'
     end
   end
 
