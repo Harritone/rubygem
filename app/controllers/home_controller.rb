@@ -19,9 +19,6 @@ class HomeController < ApplicationController
 
   def analitics
     if current_user.has_role?(:admin)
-      @users = User.all
-      @enrollments = Enrollment.all
-      @courses = Course.all
     else
       redirect_to root_path, alert: 'You are not authorized to see this page'
     end
