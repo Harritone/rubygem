@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  root 'home#index'
+
   resources :enrollments do
     get :my_students, on: :collection
   end
-  devise_for :users
+
   resources :courses do
     get :created_courses, :purchased, :pending_review, on: :collection
     resources :lessons
@@ -13,9 +17,11 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'activity', to: 'home#activity'
   get 'analitics', to: 'home#analitics'
-  get 'charts/users_per_day', to: 'charts#users_per_day'
-  get 'charts/enrollments_per_day', to: 'charts#enrollments_per_day'
-  get 'charts/course_popularity', to: 'charts#course_popularity'
 
-  root 'home#index'
+  namespace :charts do
+    get 'money_makers'
+    get 'users_per_day'
+    get 'enrollments_per_day'
+    get 'course_popularity'
+  end
 end
