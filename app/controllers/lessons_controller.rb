@@ -9,6 +9,7 @@ class LessonsController < ApplicationController
 
   def show
     current_user.view_lesson(@lesson)
+    @lessons = @course.lessons
   end
 
   def new
