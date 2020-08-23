@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+
   def index
     @courses = Course.all.limit(3)
     @latest= Course.published.latest
@@ -11,7 +12,7 @@ class HomeController < ApplicationController
 
   def activity
     if current_user.has_role?(:admin)
-      @activities = PublicActivity::Activity.all
+      @pagy, @activities = pagy(PublicActivity::Activity.all.order(created_at: :desc))
     else
       redirect_to root_path, alert: 'You are not authorized to see this page'
     end
