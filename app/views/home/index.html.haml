@@ -57,6 +57,8 @@
   .card-columns
     - @purchased.each do |course|
       = render 'courses/course', course: course
+  .text-right
+    = link_to 'My purchased courses', purchased_courses_path
   %hr
 %h2
   .fa.fa-chart-line
@@ -64,6 +66,8 @@
 .card-columns
   - @popular.each do |course|
     = render 'courses/course', course: course
+.text-right
+  =link_to 'More popular courses', courses_path(courses_search: {s: 'enrollments_count desc'})
 %hr
 %h2
   .fa.fa-star
@@ -71,6 +75,8 @@
 .card-columns
   - @top_rated.each do |course|
     = render 'courses/course', course: course
+.text-right
+  =link_to 'More top rated', courses_path(courses_search: {s: 'avarage_rating desc'})
 %hr
 %h2
   .fa.fa-clock
@@ -78,6 +84,8 @@
 .card-columns
   - @latest.each do |course|
     = render 'courses/course', course: course
+.text-right
+  =link_to 'Latest', courses_path(courses_search: {s: 'created_at desc'})
 %hr
 %h2
   .fa.fa-clock
