@@ -39,3 +39,4 @@ gem 'pundit', '~> 2.1'
 gem 'pagy', '~> 3.8', '>= 3.8.3'
 gem 'chartkick', '~> 3.4'
 gem 'groupdate', '~> 5.1'
+gem 'rails-erd', '~> 1.6', group: :development
