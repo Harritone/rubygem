@@ -25,11 +25,11 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def new?
-    @user.has_role?:teacher
+    @user.has_role?(:teacher)
   end
 
   def create?
-    @user.has_role?:teacher
+    @user.has_role?(:teacher)
   end
 
   def destroy?
@@ -39,4 +39,5 @@ class CoursePolicy < ApplicationPolicy
   def approve?
     @user.has_role?(:admin)
   end
+
 end

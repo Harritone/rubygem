@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :unapprove]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :approve, :unapprove, :analitics]
   before_action :perform_authorization, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:show]
 
@@ -57,6 +57,10 @@ class CoursesController < ApplicationController
     authorize @course, :approve?
     @course.update_attributes(approved: false)
     redirect_to @course, notice: 'Course has been unaproved and now hidden!'
+  end
+
+  def analitics
+    authorize @course, :owner?
   end
 
   def edit
