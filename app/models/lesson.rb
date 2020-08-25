@@ -22,4 +22,13 @@ class Lesson < ApplicationRecord
     self.user_lessons.where(user: user).present?
     #self.user_lesson.where(user_id: [user.id], lesson_id: [lesson.id]).empty?
   end
+
+  def prev
+    course.lessons.where("row_order < ?", row_order).order(:row_order).last
+  end
+
+  def next
+    course.lessons.where("row_order > ?", row_order).order(:row_order).first
+  end
+
 end
