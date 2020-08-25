@@ -3,6 +3,14 @@ class LessonsController < ApplicationController
   before_action :set_course, only: [:create, :show, :edit, :update, :destroy]
   before_action :perform_authorization, only: [:update, :edit, :destroy, :show]
 
+ def sort
+    @course = Course.friendly.find_by_slug(params[:course_id])
+    lesson = Lesson.friendly.find_by_slug(params[:lesson_id])
+    authorize lesson, :edit?
+    lesson.update(lesson_params)
+    render body: nil
+  end
+
   def index
     @lessons = Lesson.all
   end
@@ -67,7 +75,7 @@ class LessonsController < ApplicationController
     end
 
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :course_id)
+      params.require(:lesson).permit(:title, :content, :course_id, :row_order_position)
     end
 
     def perform_authorization
