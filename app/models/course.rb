@@ -1,8 +1,10 @@
 class Course < ApplicationRecord
   validates :title, :short_description, :language, :price, :level, presence: true
-  validates :description, presence: true, length: { minimum: 5 }
+  validates :description, presence: true, length: { minimum: 5, maximum: 3000 }
+  validates :short_description, presence: true, length: { maximum: 3000 }
 
-  validates :title, uniqueness: true
+  validates :title, uniqueness: true, length: { maximum: 70 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
 
 
   belongs_to :user, counter_cache: true
@@ -12,12 +14,14 @@ class Course < ApplicationRecord
   
   has_one_attached :avatar
 
-
-  validates :avatar, attached: true, 
+  validates :avatar, presence: true,
     content_type: ['image/png', 'image/jpg', 'image/jpeg'],
     size: { less_than: 500.kilobytes , message: 'size should be under 500 kilobytes' }
 
-  validates :avatar, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+  #validates :avatar, attached: true, 
+  #  content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+  #  size: { less_than: 500.kilobytes , message: 'size should be under 500 kilobytes' }
+
 
   has_rich_text :description
 
