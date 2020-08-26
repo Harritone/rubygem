@@ -42,3 +42,4 @@ gem 'groupdate', '~> 5.1'
 gem 'rails-erd', '~> 1.6', group: :development
 gem 'ranked-model', '~> 0.4.6'
 gem 'aws-sdk-s3', '~> 1.78'
+gem 'active_storage_validations', '~> 0.9.0'

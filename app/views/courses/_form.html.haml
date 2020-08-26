@@ -4,21 +4,27 @@
 
   .form-inputs
     = f.input :title
+
+    = f.label :avatar
+    .row
     - if @course.avatar.attached?
+      = image_tag @course.avatar, width: "200px"
       .row
-      = f.label :avatar
-      .row
-      = image_tag @course.avatar, width: '200'
+      = @course.avatar.filename
     .row
-    = f.file_field :avatar
+    = f.file_field :avatar 
+    %small= f.error :avatar, class: 'text-danger'
+
     .row
-    = f.input :description, as: :rich_text_area
+    = f.label :description
+    = f.rich_text_area :description
+    %small= f.error :description, class: 'text-danger'
     = f.input :short_description
-    = f.input :language, collection: Course.languages, include_blank: false
-    = f.input :level, collection: Course.levels
+    = f.input :language, collection: Course.languages, include_blank: true
+    = f.input :level, collection: Course.levels, include_blank: true
     = f.input :price
     = f.input :published
 
 
   .form-actions
-    = f.button :submit, class: 'btn btn-success'
+    = f.button :submit

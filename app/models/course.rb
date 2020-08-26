@@ -4,11 +4,20 @@ class Course < ApplicationRecord
 
   validates :title, uniqueness: true
 
+
   belongs_to :user, counter_cache: true
   has_many :lessons, dependent: :destroy
   has_many :enrollments, dependent: :restrict_with_error
   has_many :user_lessons, through: :lessons
+  
   has_one_attached :avatar
+
+
+  validates :avatar, attached: true, 
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+    size: { less_than: 500.kilobytes , message: 'size should be under 500 kilobytes' }
+
+  validates :avatar, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
   has_rich_text :description
 
