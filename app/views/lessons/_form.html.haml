@@ -5,8 +5,11 @@
 
   .form-inputs
     = f.input :title
+    = f.label :content
     = f.rich_text_area :content
   %p
+  = f.input :video
+  = f.input :video_thumbnail
 
   .form-actions
     = f.button :submit
