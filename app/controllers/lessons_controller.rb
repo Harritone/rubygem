@@ -1,9 +1,16 @@
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
-  before_action :set_course, only: [:create, :show, :edit, :update, :destroy]
+  before_action :set_lesson, only: [:show, :edit, :update, :destroy, :delete_video]
+  before_action :set_course, only: [:create, :show, :edit, :update, :destroy, :delete_video]
   before_action :perform_authorization, only: [:update, :edit, :destroy, :show]
 
- def sort
+  def delete_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video successfully deleted!'
+  end
+
+  def sort
     @course = Course.friendly.find_by_slug(params[:course_id])
     lesson = Lesson.friendly.find_by_slug(params[:lesson_id])
     authorize lesson, :edit?
@@ -66,19 +73,19 @@ class LessonsController < ApplicationController
   end
 
   private
-    def set_lesson
-      @lesson = Lesson.friendly.find_by_slug!(params[:id])
-    end
+  def set_lesson
+    @lesson = Lesson.friendly.find_by_slug!(params[:id])
+  end
 
-    def set_course
-      @course = Course.friendly.find_by_slug!(params[:course_id])
-    end
+  def set_course
+    @course = Course.friendly.find_by_slug!(params[:course_id])
+  end
 
-    def lesson_params
-      params.require(:lesson).permit(:title, :content, :course_id, :row_order_position, :video, :video_thumbnail)
-    end
+  def lesson_params
+    params.require(:lesson).permit(:title, :content, :course_id, :row_order_position, :video, :video_thumbnail)
+  end
 
-    def perform_authorization
-      authorize @lesson
-    end
+  def perform_authorization
+    authorize @lesson
+  end
 end
