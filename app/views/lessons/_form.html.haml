@@ -7,9 +7,17 @@
     = f.input :title
     = f.label :content
     = f.rich_text_area :content
-  %p
   = f.input :video
+  %p
+    - if @lesson.video.attached?
+      .row
+      = @lesson.video.filename
   = f.input :video_thumbnail
+  %p
+    - if @lesson.video_thumbnail.attached?
+      .row
+      = image_tag @lesson.video_thumbnail, width: "200px"
+      = @lesson.video_thumbnail.filename
 
   .form-actions
     = f.button :submit
