@@ -43,3 +43,9 @@ background-image: none;
   line-height: 1.2em;
   background-color: yellow;
 }
+
+//simple form for richtext area
+
+trix-editor.form-control {
+  height: auto;
+}
