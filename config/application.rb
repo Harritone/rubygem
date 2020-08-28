@@ -30,15 +30,16 @@ module Rubygem
       end
     end
 
-  #video previews for action_text
-  config.after_initialize do
-    ActionText::ContentHelper.allowed_attributes.add 'style'
-    ActionText::ContentHelper.allowed_attributes.add 'controls'
+    #video previews for action_text
+    config.after_initialize do
+      ActionText::ContentHelper.allowed_attributes.add 'style'
+      ActionText::ContentHelper.allowed_attributes.add 'controls'
 
-    ActionText::ContentHelper.allowed_tags.add 'video'
-    ActionText::ContentHelper.allowed_tags.add 'source'
-    ActionText::ContentHelper.allowed_tags.add 'audio'
-  end
+      ActionText::ContentHelper.allowed_tags.add 'audio'
+      ActionText::ContentHelper.allowed_tags.add 'video'
+      ActionText::ContentHelper.allowed_tags.add 'source'
+    end
+
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
